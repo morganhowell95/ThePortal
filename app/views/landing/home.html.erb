@@ -1,0 +1,258 @@
+
+<% provide(:title, "Home") %>
+
+	<!-- ==== HEADERWRAP ==== -->
+    <div id="headerwrap" id="home" name="home">
+		<header class="clearfix">
+					<h1><span class="icon icon-shield"></span></h1>
+			    <p id="welcome-home">test <!-- Dynamically welcome user by typing animation of welcome --> </p>
+			    <p id="signature-home">test <!-- Dynamically sign Morgan Howell after welcome animation --> </p>
+  		</header>	    
+    </div><!-- /headerwrap -->
+
+	<!-- ==== GREYWRAP ==== -->
+		<div id="greywrap">
+		<div class="row">
+			<div class="col-lg-4 callout">
+				<span class="icon icon-stack"></span>
+				<h2>Bootstrap 3</h2>
+				<p>Shield Theme is powered by Bootstrap 3. The incredible Mobile First Framework is the best option to run your website. </p>
+			</div><!-- col-lg-4 -->
+				
+			<div class="col-lg-4 callout">
+				<span class="icon icon-eye"></span>
+				<h2>Retina Ready</h2>
+				<p>You can use this theme with your iPhone, iPad or MacBook Pro. This theme is retina ready and that is awesome. </p>
+			</div><!-- col-lg-4 -->	
+			
+			<div class="col-lg-4 callout">
+				<span class="icon icon-heart"></span>
+				<h2>Crafted with Love</h2>
+				<p>We don't make sites, we craft themes with love & passion. That is our most valued secret. We only do thing that we love.   </p>
+			</div><!-- col-lg-4 -->	
+		</div><!-- row -->
+	</div><!-- greywrap -->
+	
+	<!-- ==== ABOUT ==== -->
+	<div class="container" id="about" name="about">
+		<div class="row white">
+		<br>
+			<h1 class="centered">A LITTLE ABOUT MYSELF</h1>
+			<hr>
+			
+			<div class="col-lg-6">
+				<p>I study computer science and business at the University of North Carolina at Chapel Hill. I've loved computers for as long as I can remember. As a kid I was fascinated with the idea of connecting a bunch of small components to create an entirely new entity, representing a different purpose and capacity than the individual components that make it. I grew up in a very small and economically depressed town (Cottonville, North Carolina) where resources of all varieties, including a quality education, were hard to come by. After many years of self-studying and convincing my parents, I left home at 15 to pursue a degree from a public boarding school, the North Carolina School of Science and Mathematics in Durham, North Carolina. At NCSSM I became involved in research at Duke University which ignited my love and curiosity for academia, especially for the fields of biology and computer science. I competed, winning many award, in competitions such as the Siemens-Westinghouse, iGEM, and state-level mock trial. I was also really into wrestling throughout all of high school.After years of fighting to excel in a very competitive environment in Durham and after months of work in the lab desperately trying to figure out this new world that seemed so different from everything I had ever known, I became the first person in my family to attend college. I was even fortunate enough to receive a scholarship and enter a community which has allowed me to broaden my perspective in ways I could have never foreseen or predicted. Since my first year of college I've drifted more towards pursuing startups instead of research.  </p>
+			</div><!-- col-lg-6 -->
+			
+			<div class="col-lg-6">
+				<p>While I'm still extremely interested in academia, I feel that I can make a more immediate impact on certain communities through targeting particular niches and aiming for improvement in quality of education and life through various channels such as job creation. I've founded and contributed to several startups including Appetite: a food discovery app for contextual searches, Vitrium: a Google Glass app that automates the documentation process for implanted surgical devices, Alescro: an escrow service implementing "smart contracts" for the storage of arbitrary data, and Carolina Creates Technology: my University's #1 accelerator program for student-lead startups. Hungry for cultural exposure, I've also jumped at every opportunity to study and work in other countries for long periods of time . I've traveled to many countries including Spain, Tanzania, China, Singpore, Indonesia, Thailand, Malaysia, Honduras, Belize, Mexico, and the UAE. I've also had the opportunity to take part in delightfully challenging internships at Godaddy and Microsoft, placing in some corporate hackathons! I studied for a semester at the National University of Singapore and for a month at the Don Quijote Escuela de Idiomas in Madrid. I lectured at Universities (on design patterns at Tungu and SUZA) and contributed to public software projects throughout parts of Tanzania. The coolest experience I've ever had in my life however was the time I scrubbed in on a double valve replacement (open heart surgery) in Guiyang, China. If you're interested in hearing more, feel free to contact me via any social media outlet below. I'm currently looking for a full-time job in either software engineering or product management in Silicon Valley. If you think I could be a match, please hit me up! 
+				</p>
+				<!-- TODO: INCLUDE PICS OF EVERYTHING THAT YOU MENTIONED IN THESE PARAGRAPHS -->
+			</div><!-- col-lg-6 -->
+		</div><!-- row -->
+	</div><!-- container -->
+
+
+	<!-- ==== PORTFOLIO ==== -->
+		<div class="container" id="portfolio" name="portfolio">
+		<br>
+			<div class="row">
+				<br>
+				<h1 class="centered">WE CREATE COOL STUFF</h1>
+				<hr>
+				<br>
+				<br>
+			</div><!-- /row -->
+			<div class="container">
+			<div class="row">	
+			
+				<!-- PORTFOLIO IMAGE 1 -->
+				<div class="col-md-4 ">
+			    	<div class="grid mask">
+						<figure>
+							<%= image_tag("portfolio/folio01.jpg", class: "img-responsive")%>
+							<figcaption>
+								<h5>DASHBOARD</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+				
+				
+						 <!-- MODAL SHOW THE PORTFOLIO IMAGE. In this demo, all links point to this modal. You should create
+						      a modal for each of your projects. -->
+						      
+						  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal-dialog">
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						          <h4 class="modal-title">Project Title</h4>
+						        </div>
+						        <div class="modal-body">
+						          <p><img class="img-responsive" src="assets/img/portfolio/folio01.jpg" alt=""></p>
+						          <p>This project was crafted for Some Name corp. Detail here a little about your job requirements and the tools used. Tell about the challenges faced and what you and your team did to solve it.</p>
+						          <p><b><a href="#">Visit Site</a></b></p>
+						        </div>
+						        <div class="modal-footer">
+						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        </div>
+						      </div><!-- /.modal-content -->
+						    </div><!-- /.modal-dialog -->
+						  </div><!-- /.modal -->
+				
+				
+				<!-- PORTFOLIO IMAGE 2 -->
+				<div class="col-md-4">
+			    	<div class="grid mask">
+						<figure>
+							<img class="img-responsive" src="assets/img/portfolio/folio02.jpg" alt="">
+							<figcaption>
+								<h5>UI DESIGN</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+				
+				<!-- PORTFOLIO IMAGE 3 -->
+				<div class="col-md-4">
+			    	<div class="grid mask">
+						<figure>
+							<img class="img-responsive" src="assets/img/portfolio/folio03.jpg" alt="">
+							<figcaption>
+								<h5>ANDROID PAGE</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+			</div><!-- /row -->
+
+				<!-- PORTFOLIO IMAGE 4 -->
+			<div class="row">	
+				<div class="col-md-4 ">
+			    	<div class="grid mask">
+						<figure>
+							<img class="img-responsive" src="assets/img/portfolio/folio04.jpg" alt="">
+							<figcaption>
+								<h5>PROFILE</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+				
+				<!-- PORTFOLIO IMAGE 5 -->
+				<div class="col-md-4">
+			    	<div class="grid mask">
+						<figure>
+							<%= image_tag("img/portfolio/folio05.jpg", class: "img-responsive")%>
+							<figcaption>
+								<h5>TWITTER STATUS</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+				
+				<!-- PORTFOLIO IMAGE 6 -->
+				<div class="col-md-4">
+			    	<div class="grid mask">
+						<figure>
+							<img class="img-responsive" src="assets/img/portfolio/folio06.jpg" alt="">
+							<figcaption>
+								<h5>PHONE MOCKUP</h5>
+								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
+							</figcaption><!-- /figcaption -->
+						</figure><!-- /figure -->
+			    	</div><!-- /grid-mask -->
+				</div><!-- /col -->
+			</div><!-- /row -->
+			<br>
+			<br>
+		</div><!-- /row -->
+	</div><!-- /container -->
+
+	
+	<section class="section-divider textdivider divider6">
+			<div class="container" id="make-location">
+				<h1>CRAFTED IN CHAPEL HILL, NORTH CAROLINA</h1>
+				<hr>
+				<p>173E E Franklin St</p>
+				<p>+1 704 985-5705</p>
+				<p><a class="icon icon-twitter" href="#"></a> | <a class="icon icon-facebook" href="#"></a></p>
+
+				<p>
+			    <table id="social-panel">
+			      <tr>
+
+			      <td><%= link_to image_tag("Facebook_Icon.png"), "https://www.facebook.com/mhowl1", :class =>'sm-icon'%> </td>
+
+			      <td> <%= link_to image_tag("LinkedIn_Icon.png"), "https://www.linkedin.com/pub/morgan-howell/51/817/211", :class =>'sm-icon'%> </td>
+
+			      <td> <%= link_to image_tag("GooglePlus_Icon.png"), "https://plus.google.com/u/0/+MorganHowell1995/posts", :class =>'sm-icon'%> </td>
+
+			      <td> <%= link_to image_tag("GitHub_Icon.png"), "https://github.com/morganhowell95", :class =>'sm-icon'%> </td>
+
+			    </tr>
+
+			    </table>
+		  	</p>
+			</div><!-- container -->
+		</section><!-- section -->
+
+
+		<div class="container" id="contact" name="contact">
+			<div class="row">
+			<br>
+				<h1 class="centered">THANKS FOR VISITING US</h1>
+				<hr>
+				<br>
+				<br>
+				<div class="col-lg-4">
+					<h3>Contact Information</h3>
+					<p><span class="icon icon-home"></span> Some Address 987, NY<br/>
+						<span class="icon icon-phone"></span> +34 9884 4893 <br/>
+						<span class="icon icon-mobile"></span> +34 59855 9853 <br/>
+						<span class="icon icon-envelop"></span> <a href="#"> agency@blacktie.co</a> <br/>
+						<span class="icon icon-twitter"></span> <a href="#"> @blacktie_co </a> <br/>
+						<span class="icon icon-facebook"></span> <a href="#"> BlackTie Agency </a> <br/>
+					</p>
+				</div><!-- col -->
+				
+				<div class="col-lg-4">
+					<h3>Newsletter</h3>
+					<p>Register to our newsletter and be updated with the latests information regarding our services, offers and much more.</p>
+					<p>
+						<form class="form-horizontal" role="form">
+						  <div class="form-group">
+						    <label for="inputEmail1" class="col-lg-4 control-label"></label>
+						    <div class="col-lg-10">
+						      <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="text1" class="col-lg-4 control-label"></label>
+						    <div class="col-lg-10">
+						      <input type="text" class="form-control" id="text1" placeholder="Your Name">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-lg-10">
+						      <button type="submit" class="btn btn-success">Sign in</button>
+						    </div>
+						  </div>
+					   </form><!-- form -->
+					</p>
+				</div><!-- col -->
+				
+				<div class="col-lg-4">
+					<h3>Support Us</h3>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+				</div><!-- col -->
+
+			</div><!-- row -->
+		
+		</div><!-- container -->

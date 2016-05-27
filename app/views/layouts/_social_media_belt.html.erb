@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-5">
+    <div class="ss-belt center">
+    <!-- Devise supports integration with OmniAuth, below are options for 3rd party registrations via OmniAuth -->
+    <%= link_to image_tag("facebook-icon.png", alt: "Facebook Login", height: 50, width: 50, class: "ss-icon", id: "fb-auth"), user_omniauth_authorize_path(:facebook)%>
+
+    <%= link_to image_tag("google-icon.png", alt: "Google Login", height: 50, width: 50, class: "ss-icon", id: "go-auth"), user_omniauth_authorize_path(:google_oauth2)%>
+
+    <%= link_to image_tag("linkedin-icon.png", alt: "LinkedIn Login", height: 50, width: 50, class: "ss-icon", id: "ln-auth"), user_omniauth_authorize_path(:linkedin)%>
+    </div>
+  </div>
+</div>
