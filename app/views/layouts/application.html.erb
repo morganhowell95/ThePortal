@@ -9,21 +9,21 @@
 		<%= csrf_meta_tags %>
 		<%= render 'layouts/shim' %>
 	</head>
-	<body data-spy="scroll" data-offset="0" data-target="#navbar-main">
+	<body data-spy="scroll" data-offset="0" data-target="#navbar-main" class="<%= controller_name %> <%= action_name %>">
 		<%= render 'layouts/header' %>
-		<!-- System wide flash mechanism where notifications will temporarily show on next redirect -->
-		<% flash.each do |message_type, message| %>
-				<!-- Devise error messages must be forced to conform with an alternate template -->
-				<% if message_type.eql?("alert") %>
-					<!-- TODO: error in logins causes weird formatting, look into css -->
-					<%= render 'shared/error_messages', object: flash%>
-				<% else %>
-					<%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-				<% end %>
-		<% end %>
-
-		<%= yield %>
-		<%= render 'layouts/footer' %>
+			<div id="<%= controller_name %>-<%= action_name %>">
+					<!-- System wide flash mechanism where notifications will temporarily show on next redirect -->
+					<% flash.each do |message_type, message| %>
+							<!-- Devise error messages must be forced to conform with an alternate template -->
+							<% if message_type.eql?("alert") %>
+								<!-- TODO: error in logins causes weird formatting, look into css -->
+								<%= render 'shared/error_messages', object: flash%>
+							<% else %>
+								<%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+							<% end %>
+					<% end %>
+				<%= yield %>
+			</div>
 		<%= debug(params) if Rails.env.development? %>
 	</body>
 </html>

@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
 //= require bootstrap-sprockets
 //= require interact
 //= require jquery-func
@@ -20,4 +19,5 @@
 //= require modernizr.custom
 //= require retina
 //= require smoothscroll
+//= require jquery-readyselector
 //= require_tree .

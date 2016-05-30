@@ -5,17 +5,20 @@
       <div class="container">
         <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon icon-shield" ></span>
+            <%= image_tag("mh-favicon.png", size: "50x45")%>
             </button>
-            <a class="navbar-brand hidden-xs hidden-sm" href="/"><span class="icon icon-shield" ></span></a>
+            <a class="navbar-brand hidden-xs hidden-sm" href="/"><%= image_tag("mh-favicon.png",
+            size: "50x45", id: "nav-logo")%></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li> <a href="/#headerwrap" class="smoothScroll">Home</a></li>
-            <li> <a href="/#bio" class="smoothScroll">Bio</a></li>
-            <li> <a href="/#portfolio" class="smoothScroll">Portfolio</a></li>
-            <li> <a href="/#contact" class="smoothScroll">Contact</a></li>
-            <li id="divider-nav"> <a> | </a> </li>
+            <% if !controller_name.eql?("blog")%>
+            <li> <a href="#bio" class="smoothScroll">Bio</a></li>
+            <li> <a href="#portfolio" class="smoothScroll">Portfolio</a></li>
+            <li> <a href="#contact" class="smoothScroll">Contact</a></li>
+            <li id="divider-nav"> <a> - </a> </li>
+            <% end %>
             <li id="blog-nav"> <a href="/blog"> Blog </a></li>
         </div><!--/.nav-collapse -->
       </div>
