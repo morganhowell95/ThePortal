@@ -2,27 +2,33 @@
 $(".blog.main").ready(
 	function(){
 
+		var inverseMain = function() {
+			$('#introvid').addClass('hidden');
+			$('#wrapper').addClass('hidden');
+			$('.menu-info').addClass('hidden');
+		}
+
 		
 		$('.hm').click(function(){
-			$('#wrapper').toggleClass('hidden');
+			inverseMain();
 			$('#dsa-wrapper').toggleClass('hidden');
 		});
 
 
 		$('.fb').click(function(){
-			$('#wrapper').toggleClass('hidden');
+			inverseMain();
 			$('#ips-wrapper').toggleClass('hidden');
 		});
 
 
 		$('.gp').click(function(){
-			$('#wrapper').toggleClass('hidden');
+			inverseMain();
 			$('#clrs-wrapper').toggleClass('hidden');
 		});
 
 
 		$('.tw').click(function(){
-			$('#wrapper').toggleClass('hidden');
+			inverseMain();
 			$('#workout-wrapper').toggleClass('hidden');
 		});
 		
@@ -31,8 +37,15 @@ $(".blog.main").ready(
 			$('#dsa-wrapper').addClass('hidden');
 			$('#ips-wrapper').addClass('hidden');
 			$('#clrs-wrapper').addClass('hidden');
-			$('#wrapper').toggleClass('hidden');
+			$('#introvid').removeClass('hidden');
+			$('#wrapper').removeClass('hidden');
+			$('.menu-info').removeClass('hidden');
 		});
+
+		$('#menu-info').click(function(){
+			$('#introvid').toggleClass('hidden');
+			$('#modal9').modal('show');
+		})
 
 
 

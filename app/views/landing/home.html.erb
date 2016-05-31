@@ -82,9 +82,9 @@
 						        <div class="modal-body">
 						          <p><%= image_tag("vitrium_logo.jpg", size: "600x400", class: "img-responsive")%></p>
 						          <p>Vitrium is a Google Glass app that automates the note taking process for surgeons during surgery. Currently a third party sales representative records devices that are implanted within patients in the operating room. Vitrium provides a hands-free method of recording device names, such as "2.5mm Stryker Screw", so that the information can be appended to the patient's EHR for inventory purposes.</p>
-						          <p><b><a href="#">Public Face (for demo requests)</a></b></p>
-						          <p><b><a href="#">Private APIs (consumed for documentation) </a></b></p>
-						          <p><b><a href="#">Repos</a></b></p>
+						          <p><b><a href="http://vitriumhealth.com/">Public Face (for demo requests)</a></b></p>
+						          <p><b><a href="https://vitrium-health.herokuapp.com/">APIs (consumed for documentation by Glass) </a></b></p>
+						          <p><b><a href="https://github.com/vitrium">Repos</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -121,10 +121,12 @@
 						          <p> Alescro serves as an escrow service that stores and secures arbitrary data (implementing a form of CBC-AES encryption) with the ability to be accessed through open-ended release conditions by the third-party escrow member. Release conditions are specified by means of a "smart contract" which may involve simplified time-keeping logic (such as the passing of a date) or more sophisticated conditions which can be verified within trustable public records, such as the outcome of a sports event or reflection of a new birth certificate entry. I built a custom authentication layer on OAuth2 protocol using Doorkeeper and Devise that enables Alescro to be both an OAuth provider and client. Users can acquire Alescro auth tokens, which gives them full access to all the APIs and services, through signing in with Facebook, LinkedIn, Google, or creating an Alescro account. One cool use case of this product would be someone uploading a video to tell their child happy birthday when the child turns 70. The person sending the video may not be physically around to witness the birthday, but they can encrypt a video and state within the smart contract that the video must not be released to the other party until public records reflect the 70th birthday. In this example, the contract is being used as a smart time-capsule, similar to how one would hand papers to a lawyer (the escrow) with the intentions of others not receiving the papers until the death of the sender and the occurrence of some event (such as financial trouble).
 						          </p>
 						          <p><b><a href="#">Visit Site</a></b></p>
-						          <p><b><a href="#">OAuth Architecture</a></b></p>
-						          <p><b><a href="#">Web Portal Repo</a></b></p>
-						          <p><b><a href="#">iOS Repo</a></b></p>
-						          <p><b><a href="#">Android Repo</a></b></p>
+						          <p><b>
+						          <%= link_to("OAuth Architecture", downloadAlescroAuthFlow_path) %> 
+						        	</b></p>
+						          <p><b><a href="https://github.com/Guru-Developers/Alescro-Online">Web Portal Repo</a></b></p>
+						          <p><b><a href="https://github.com/Guru-Developers/Alescro-iOS">iOS Repo</a></b></p>
+						          <p><b><a href="https://github.com/Guru-Developers/Alescro-Android">Android Repo</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -185,9 +187,10 @@
 															ever having to click the mouse.
 
 													</p>
-						          <p><b><a href="#">Runnable Jar</a></b></p>
-						          <p><b><a href="#">User Guide</a></b></p>
-						          <p><b><a href="#">Repo</a></b></p>
+						          <p><b><%= link_to("Runnable Jar", downloadCWjar_path)%></b></p>
+						          <p><b> <%= link_to("User Guide", downloadClockWorkUserGuide_path) %>
+						          </b></p>
+						          <p><b><a href="https://github.com/cs2103jan2016-T09-5j/main">Repo</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -221,10 +224,10 @@
 						        </div>
 						        <div class="modal-body">
 						          <p><%= image_tag("jcf_logo.jpg", class: "img-responsive")%></p>
-						          <p>JCF uses the popular light-weight JavaScript parser Acorn to construct an AST (abstract syntax tree) from valid JavaScript code the user submits. As part of my project submission to Khan Academy, I created a suite of APIs that navigated these ASTs using various graph searching algorithms (Dijkstra, BFS, DFS, A*) to validate submitted code and enforce relations created by the user through the graphical hierarchy enforcer. A user can enforce certain relationships, such as black listing a for loop or enforcing the presence of a conditional statement that is nested within a for loop that is the sibling of another for loop. The console tells the user (in real time as they type) whether the code satisfies the enforced relations or not.</p>
-						          <p><b><a href="#">The Site</a></b></p>
-						          <p><b><a href="#">The Repo</a></b></p>
-						          <p><b><a href="#">Acorn Docs</a></b></p>
+						          <p>JCF uses the popular light-weight JavaScript parser Acorn to construct an AST (abstract syntax tree) from valid JavaScript code the user submits. As part of my project submission to Khan Academy, I created a suite of APIs that navigated these ASTs using various graph searching algorithms (Dijkstra, BFS, DFS, A*) to validate submitted code and enforce relations created by the user through the graphical hierarchy enforcer. A user can enforce certain relationships, such as black listing a for loop or enforcing the presence of a conditional statement that is nested within a for loop that is the sibling of another for loop. The console tells the user (in real time as they type) whether the code satisfies the enforced relations or not. Password for accessing the website is: "KhanAcademyRocks!".</p>
+						          <p><b><a href="https://js-challenge.herokuapp.com/">The Site</a></b></p>
+						          <p><b><a href="https://github.com/morganhowell95/JSChallengeFramework-KhanAcademy">The Repo</a></b></p>
+						          <p><b><a href="https://github.com/ternjs/acorn">Acorn Docs</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -258,9 +261,9 @@
 						        <div class="modal-body">
 						          <p><%= image_tag("carolina_creates_logo.jpg", class: "img-responsive")%></p>
 						          <p>Carolina Creates' mission is to foster innovative creation on campus by providing the resources needed to make ideas happen. The organization builds a collaborative community of innovators, leaders, thinkers, and doers. I joined my Junior year as board member and Director of Technology. Under Carolina Creates I developed my school's first crowdfunding platform, where statups can apply to be funded by fellow students.</p>
-						          <p><b><a href="#">Carolina Creates (public face)</a></b></p>
-						          <p><b><a href="#">Carolina Creates' Technology</a></b></p>
-						          <p><b><a href="#">The Sonder Market (example)</a></b></p>
+						          <p><b><a href="http://www.carolinacreates.unc.edu/">Carolina Creates (public face)</a></b></p>
+						          <p><b><a href="http://www.carolinacreates.unc.edu/communities/technology">Carolina Creates' Technology</a></b></p>
+						          <p><b><a href="http://www.carolinacreates.unc.edu/crowdfunding-platform">The Sonder Market (example)</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -295,8 +298,8 @@
 						        <div class="modal-body">
 						          <p><%= image_tag("appetite_logo.jpg", class: "img-responsive")%></p>
 						          <p>Appetite is an iOS and Android application designed to provide suggestions of local venues based on the user's perceived mood. The application will collect information on the user's profile (if allowed) and environmental factors such as weather and time to come up with a selection of moods for the user to pick.</p>
-						          <p><b><a href="#">Appetite on Google Play</a></b></p>
-						          <p><b><a href="#">Open-Source Objective-C Repos</a></b></p>
+						          <p><b><a href="https://play.google.com/store/apps/details?id=guru.apps.llc.appetite">Appetite on Google Play</a></b></p>
+						          <p><b><a href="https://github.com/morganhowell95/Appetite">Open-Source Objective-C Repos</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -333,8 +336,8 @@
 						        <div class="modal-body">
 						          <p><%= image_tag("NUSRiders_logo.jpg", class: "img-responsive")%></p>
 						          <p>During my time in Singapore I developed a ride sharing service in PHP. I never actually intended to bring this to market, rather hoped the project would help me become more comfortable with PHP and writing raw SQL entities and queries which Rails had been shielding me from up until this point. I also layered in a couple Google APIs (including Maps) which directly interface with the DBs through custom-written PHP adapters. Schemas and query examples can be found on the repo link.</p>
-						          <p><b><a href="#">The Site</a></b></p>
-						          <p><b><a href="#">The Repo</a></b></p>
+						          <p><b><a href="#">The Site (being deployed soon)</a></b></p>
+						          <p><b><a href="https://github.com/morganhowell95/NUSriders">The Repo</a></b></p>
 						        </div>
 						        <div class="modal-footer">
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -407,7 +410,7 @@
 												In yeast, an orthologous model of human gene function, my team and I developed a system of two dimerizing fusion proteins to control two-hybrid mediated transcriptional activation in response to a 450 nm blue light (optogenetic) stimulus. After extensive characterization and optimization of our system, we compiled our methodologies into a physical toolkit, which contains custom yeast strains frozen in glycerol stocks, standardized plasmids, a stochastic network model, the design of a light pulse generator to induce gene expression, and a custom software package for rapid analysis of data (which I wrote in C++). If that sounded like a slur of jargon, check out our wiki for a more detailed description.
 											</p>
 						          <p><b><a href="http://2012.igem.org/Team:Duke/Project">Project Description Wiki</a></b></p>
-						          <p><b><a href="#">Paper Submission for Siemens-Westinghouse and iGEM</a></b></p>
+						          <p><b> <%= link_to("Paper Submission for Siemens-Westinghouse and iGEM", downloadSiemens_path) %></b></p>
 						          <p><b><a href="http://www.bizjournals.com/triangle/blog/2013/02/former-gsk-exec-wins-life-science.html#i5">Press</a></b></p>
 						        </div>
 						        <div class="modal-footer">
