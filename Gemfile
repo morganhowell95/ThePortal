@@ -4,7 +4,7 @@ gem 'bcrypt',                  '3.1.7'
 gem 'faker',                   '1.4.2'
 gem 'carrierwave',             '0.10.0'
 gem 'mini_magick',             '3.8.0'
-gem 'fog',                     '1.23.0'
+gem 'fog'
 gem 'jquery-rails',            '4.0.3'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-sass',          '~> 3.3.6'
@@ -14,6 +14,7 @@ gem 'coffee-rails',            '4.1.0'
 gem 'jbuilder',                '2.2.3'
 gem 'sdoc',                    '0.4.0', group: :doc
 gem 'net-ssh'
+gem 'puma'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -31,7 +32,6 @@ end
 group :production do
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
-  gem 'puma',           '2.11.1'
 end
 
 
