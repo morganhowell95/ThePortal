@@ -26,11 +26,24 @@
 	</ul>
 </div>
 
+<!-- blog is implemented as a SPA for offline access -->
 
+<!-- partial to be loaded with workout regimen -->
 <div id="workout-wrapper" class="hidden">
 <%= render 'shared/workout_partial' %>
 </div>
 
+<!-- partial to be loaded for DS&A review -->
 <div id="dsa-wrapper" class="hidden">
 <%= render 'shared/dsa_partial' %>
+</div>
+
+<!-- partial to be loaded for interview problem solving -->
+<div id="ips-wrapper" class="hidden">
+<%= render 'shared/ips_partial' %>
+</div>
+
+<!-- partial to be loaded for CLRS book review and explanation-->
+<div id="clrs-wrapper" class="hidden">
+<%= render 'shared/clrs_partial' %>
 </div>

@@ -1,0 +1,106 @@
+$(document).ready(function(){
+
+var finalTop = "Hi! Welcome to my online portfolio.";
+var finalMiddle = "Check out my blog for interview prep, theory review, and workout suggestions.";
+var finalBottom = "- Morgan Howell";
+var currentTop = 0;
+var currentBottom = 0;
+var currentMiddle = 0;
+var intervalID;
+
+
+var tickOnFront = function(isTop) {
+	if (isTop) {	
+		if (currentTop < finalTop.length) {	
+			clearTimeout(eraseTickOnFront)
+			var current = $('#welcome-home').html();
+			$('#welcome-home').html(current + "_");
+			var eraseTickOnFront = function() {
+				current = $('#welcome-home').html();
+				var writer_index = current.indexOf('_');
+				if (writer_index != -1) {
+					$('#welcome-home').html(current.slice(0, writer_index))};
+				}
+			//window.setTimeout(eraseTickOnFront, 500);
+		}
+	}
+	else {
+		current = $('#signature-home').html();
+		$('#signature-home').html(current + '_');
+	}
+}
+
+// var buildTop = function() {
+// 	var current = $('#welcome-home').html();
+// 	var writer_index = current.indexOf('_');
+// 	if (writer_index != -1) {
+// 		current = current.slice(0, writer_index);
+// 	}
+// 	if (currentTop < finalTop.length) {
+// 		$('#welcome-home').html(current + finalTop[currentTop] + "_");
+// 	} else {
+// 		var current = $('#welcome-home').html();
+// 		var writer_index = current.indexOf('_');
+// 		if (writer_index != -1) {
+// 			current = current.slice(0, writer_index);
+// 			$('#welcome-home').html(current);
+// 		}
+// 		clearInterval(buildTop);
+// 		setInterval(buildMiddle, 400);
+// 	}
+// 	currentTop++;
+// };
+
+
+// var buildMiddle = function() {
+// 	var current = $('#blog-plug').html();
+// 	var writer_index = current.indexOf('_');
+// 	if (writer_index != -1) {
+// 		current = current.slice(0, writer_index);
+// 	}
+// 	if (currentMiddle < finalMiddle.length) {
+// 		$('#blog-plug').html(current + finalMiddle[currentMiddle] + "_");
+// 	} else {
+// 		var current = $('#blog-plug').html();
+// 		var writer_index = current.indexOf('_');
+// 		if (writer_index != -1) {
+// 			current = current.slice(0, writer_index);
+// 			$('#blog-plug').html(current);
+// 		}
+// 		clearInterval(buildMiddle);
+// 		setInterval(buildBottom, 400);
+// 	}
+// 	currentMiddle++;
+// };
+
+$(document).scroll(function() {
+  if ($(document).scrollTop() >= 800) {
+  		$('#headerwrap').css("background","url(<%= asset_path 'san_fran_bg.jpg' %>) no-repeat center top");
+  		$('#welcome-home').css("margin-top", "33px");
+  		$('#fox_git').removeClass("hidden");
+  	}
+  });
+
+var buildBottom = function() {
+	var current = $('#signature-home').html();
+	var writer_index = current.indexOf('_');
+	if (writer_index != -1) {
+		current = current.slice(0, writer_index);
+	}
+	if (currentBottom < finalBottom.length) {
+		$('#signature-home').html(current + finalBottom[currentBottom] + "_");
+	} else {
+		var current = $('#signature-home').html();
+		var writer_index = current.indexOf('_');
+		if (writer_index != -1) {
+			current = current.slice(0, writer_index);
+			$('#signature-home').html(current);
+		}
+		clearInterval(intervalID);
+	}
+	currentBottom++;
+};
+
+intervalID = setInterval(buildBottom, 200);
+
+});

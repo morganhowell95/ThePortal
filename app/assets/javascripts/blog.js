@@ -10,14 +10,14 @@ $(".blog.main").ready(
 
 
 		$('.fb').click(function(){
-			alert('clicked');
-			$('#wrapper').hide();
+			$('#wrapper').toggleClass('hidden');
+			$('#ips-wrapper').toggleClass('hidden');
 		});
 
 
 		$('.gp').click(function(){
-			alert('clicked');
-			$('#wrapper').hide();
+			$('#wrapper').toggleClass('hidden');
+			$('#clrs-wrapper').toggleClass('hidden');
 		});
 
 
@@ -29,6 +29,8 @@ $(".blog.main").ready(
 		$('.back-button').click(function(){
 			$('#workout-wrapper').addClass('hidden');
 			$('#dsa-wrapper').addClass('hidden');
+			$('#ips-wrapper').addClass('hidden');
+			$('#clrs-wrapper').addClass('hidden');
 			$('#wrapper').toggleClass('hidden');
 		});
 
