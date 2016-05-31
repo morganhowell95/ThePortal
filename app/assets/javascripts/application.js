@@ -17,7 +17,6 @@
 //= require jquery-func
 //= require jquery.easing.1.3
 //= require modernizr.custom
-//= require retina
 //= require smoothscroll
 //= require jquery-readyselector
 //= require_tree .

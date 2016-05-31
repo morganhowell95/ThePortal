@@ -1,27 +1,36 @@
-<div id="wrapper" class="hidden">
+<div id="wrapper">
 	<h1>The Fundamental Growth Plan</h1>
 	<ul class="nav">
+
 		<li class="hm">
 			<%= image_tag("algorithm-icon.png", size: "60x60", class: "icon")%>
 			<span>Data Structures &
 						Algorithms</span>
 		</li>
+
 		<li class="fb">
 			<%= image_tag("interview_icon.png", size: "60x60", class: "icon")%>
 			<span>Interview Problem Solving</span>
 		</li>
+
 		<li class="gp">
 			<%= image_tag("book_icon.png", size: "60x60", class: "icon")%>
 			<span>CLRS Solutions & Theory</span>
 		</li>
+
 		<li class="tw">
 			<%= image_tag("workout_icon.png", size: "60x60", class: "icon")%>
 			<span>Workout Regimen</span>
 		</li>
+
 	</ul>
 </div>
 
 
-<div id="workout-wrapper">
+<div id="workout-wrapper" class="hidden">
 <%= render 'shared/workout_partial' %>
+</div>
+
+<div id="dsa-wrapper" class="hidden">
+<%= render 'shared/dsa_partial' %>
 </div>

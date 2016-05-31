@@ -26,6 +26,15 @@
 		border: 2px solid black;
 		padding-left: 80px;
 	}
+	#dsa-menu{
+		width: 728px;
+		margin: 60px auto;
+		background: #fff;
+		padding: 10px;
+		height: 280px;
+		border: 2px solid black;
+		padding-left: 80px;
+	}
 	.nav{
 		overflow:hidden;
 		margin:0 auto;
@@ -131,6 +140,46 @@
 		height: auto;
 
 
+	}
+
+	.open-description p{
+		text-align: left;
+	}
+
+	.open-description {
+		float: none;
+		margin: 0 auto;
+		margin-top: 15px;
+	}
+
+	.sprints {
+		margin-left: -100px;
+		margin-right: 20px;
+	}
+
+	.sprints * {
+		padding-left: 20px;
+		padding-right: 25px;
+	}
+
+	.workout-day *{
+		padding-left: 20px;
+		padding-right: 25px;
+		text-align: left;
+	}
+
+	.workout-day {
+		left: 50%;
+		right: 50%;
+		width: 550px;
+	}
+
+	.back-button {
+    height: 300px;
+    width: 30px;
+    position: fixed;
+    left: 5%;
+    top: 10%;
 	}
 
 }

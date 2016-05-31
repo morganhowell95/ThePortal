@@ -12,7 +12,13 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li> <a href="/#headerwrap" class="smoothScroll">Home</a></li>
+            <li> <a href=
+                <% if !controller_name.eql?("blog")%>
+                "#headerwrap"
+                <% else %>
+                "/#headerwrap"
+                <% end %>
+                 class="smoothScroll">Home</a></li>
             <% if !controller_name.eql?("blog")%>
             <li> <a href="#bio" class="smoothScroll">Bio</a></li>
             <li> <a href="#portfolio" class="smoothScroll">Portfolio</a></li>

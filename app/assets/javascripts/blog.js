@@ -2,16 +2,10 @@
 $(".blog.main").ready(
 	function(){
 
-		var menuSelect = function (selection) {
-			$('#wrapper').hide();
-			var partialInclude = "<%= render '_"+ selection + "_partial' %>";
-			$('body').append(partialInclude);
-		};
-
 		
 		$('.hm').click(function(){
-			alert('clicked');
-			$('#wrapper').hide();
+			$('#wrapper').toggleClass('hidden');
+			$('#dsa-wrapper').toggleClass('hidden');
 		});
 
 
@@ -28,10 +22,15 @@ $(".blog.main").ready(
 
 
 		$('.tw').click(function(){
-			menuSelect("workout");
-			
+			$('#wrapper').toggleClass('hidden');
+			$('#workout-wrapper').toggleClass('hidden');
 		});
 		
+		$('.back-button').click(function(){
+			$('#workout-wrapper').addClass('hidden');
+			$('#dsa-wrapper').addClass('hidden');
+			$('#wrapper').toggleClass('hidden');
+		});
 
 
 
