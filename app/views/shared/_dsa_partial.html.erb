@@ -2,29 +2,83 @@
   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 </button>
 
-<div id="dsa-menu">
+<div id="dsa-menu" class="menu">
 	<h1>Data Structures & Algorithms</h1>
-	<ul class="nav">
+		<ul class="nav chapterset">
 
-		<li class="hm">
+		<li class="hm" id="qs">
 			<%= image_tag("dsa/stack_icon.png", size: "60x60", class: "icon")%>
 			<span>Queues & Stacks</span>
 		</li>
 
-		<li class="fb">
+		<li class="fb" id="sort">
 			<%= image_tag("dsa/sort_icon.png", size: "60x60", class: "icon")%>
 			<span>Comparison Sorting</span>
 		</li>
 
-		<li class="gp">
+		<li class="gp" id="distro">
 			<%= image_tag("dsa/count_icon.png", size: "60x60", class: "icon")%>
 			<span>Distribution Sorting</span>
 		</li>
 
-		<li class="tw">
+		<li class="tw" id=""heap>
 			<%= image_tag("dsa/heap_icon.png", size: "60x60", class: "icon")%>
 			<span>Heaps & Heap Sorting</span>
 		</li>
 
 	</ul>
+
+		<ul class="nav chapterset">
+
+		<li class="cl">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/phone-24.png" alt="">
+			<span>Trees</span>
+		</li>
+
+		<li class="hm">
+			<%= image_tag("dsa/stack_icon.png", size: "60x60", class: "icon")%>
+			<span>Graphs</span>
+		</li>
+
+		<li class="fb">
+			<%= image_tag("dsa/sort_icon.png", size: "60x60", class: "icon")%>
+			<span>MSTs</span>
+		</li>
+
+		<li class="gp">
+			<%= image_tag("dsa/count_icon.png", size: "60x60", class: "icon")%>
+			<span>Dynamic Programming</span>
+		</li>
+	</ul>
+
+	<ul class="nav chapterset">
+
+		<li class="cl">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/phone-24.png" alt="">
+			<span>Greedy</span>
+		</li>
+
+		<li class="hm">
+			<%= image_tag("dsa/stack_icon.png", size: "60x60", class: "icon")%>
+			<span>Hash Tables</span>
+		</li>
+
+		<li class="fb">
+			<%= image_tag("dsa/sort_icon.png", size: "60x60", class: "icon")%>
+			<span>Popular Libs</span>
+		</li>
+
+		<li class="gp">
+			<%= image_tag("dsa/count_icon.png", size: "60x60", class: "icon")%>
+			<span>Design Patterns</span>
+		</li>
+	</ul>
+</div>
+
+
+
+
+<!-- partial to be loaded for queues and stacks content-->
+<div id="queues-stacks-wrapper">
+<%= render 'content/queues_stacks_partial' %>
 </div>

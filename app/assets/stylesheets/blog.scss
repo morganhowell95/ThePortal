@@ -1,11 +1,8 @@
 
 //page-specific css
 #blog-main{
-		*{
-		margin:0;
-		padding:0;
-		text-align: center;
-	}
+
+	
 	body{
 		background:#CCCAA1;
 	}
@@ -27,13 +24,13 @@
 		padding-left: 80px;
 	}
 	#dsa-menu{
-		width: 728px;
-		margin: 60px auto;
-		background: #fff;
-		padding: 10px;
-		height: 280px;
-		border: 2px solid black;
-		padding-left: 80px;
+    width: 728px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 10px;
+    height: 800px;
+    border: 2px solid black;
+    padding-left: 80px;
 	}
 	.nav{
 		overflow:hidden;
@@ -127,6 +124,10 @@
 
 	}
 
+  .src span{
+    margin-left: 0;
+  }
+
 	#pp-wrapper {
 		margin-top: 50px;
 		width: auto;
@@ -138,13 +139,22 @@
 		margin-top: 50px;
 		width: auto;
 		height: auto;
-
-
 	}
+
+  #queues-stacks-wrapper {
+    margin-top: 100px;
+    width: auto;
+    height: auto;
+  }
 
 	.open-description p{
 		text-align: left;
 	}
+
+  .src-code {
+    width: 1050px;
+    margin-left: 100px;
+  }
 
 	.open-description {
 		float: none;
@@ -769,6 +779,10 @@ input[type="button"].btn-block {
 }
 .collapse {
   display: none;
+}
+
+.tutvideo {
+  margin-left: 325px;
 }
 
 

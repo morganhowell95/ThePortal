@@ -1,0 +1,169 @@
+<button type="button" class="btn btn-default back-button" aria-label="Left Align">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</button>
+
+
+<h1> <strong> Queues and Stacks </strong> </h1>
+<hr>
+<iframe width="560" height="315" class="tutvideo" src="https://www.youtube.com/embed/YRWjgZ4xzSo" frameborder="0" allowfullscreen></iframe>
+<hr>
+
+
+<h2> Queue (Array Implementation)</h2>
+
+<div class="src-code" style="background: #ffffff; overflow:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//A queue is a First In First Out (FIFO) data structure</span>
+<span style="color: #888888">//Java gives a much more in-depth perspective for the array implementation of both the queue and stack</span>
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">ArrayImplOfQueue</span> <span style="color: #333333">&lt;</span> T <span style="color: #333333">&gt;</span> <span style="color: #008800; font-weight: bold">implements</span> Queue <span style="color: #333333">&lt;</span> T <span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+ <span style="color: #008800; font-weight: bold">private</span> T<span style="color: #333333">[]</span> q<span style="color: #333333">;</span>
+ <span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">int</span> totalSize<span style="color: #333333">;</span>
+ <span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">int</span> headIndex<span style="color: #333333">;</span>
+ <span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">int</span> tailIndex<span style="color: #333333">;</span>
+
+ <span style="color: #888888">//We will assume the initial array has a fixed size so that we can demonstrate the &quot;wrapping&quot; functionality</span>
+ <span style="color: #888888">//other implementations could involve the array growing (dynamically) after reaching its limit or an ArrayList could</span>
+ <span style="color: #888888">//be used which would result in a solution similar to the Python one described.</span>
+ <span style="color: #555555; font-weight: bold">@SuppressWarnings</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;unchecked&quot;</span><span style="color: #333333">)</span>
+ <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">ArrayImplOfQueue</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> totalSize<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">totalSize</span> <span style="color: #333333">=</span> totalSize<span style="color: #333333">;</span>
+  <span style="color: #888888">//Usually this is unsafe, but since we&#39;re dealing with</span>
+  <span style="color: #888888">//an underlying implementation of a queue and enforcing strong typing - all is well</span>
+  <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">q</span> <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">[])</span> <span style="color: #008800; font-weight: bold">new</span> Object<span style="color: #333333">[</span>totalSize<span style="color: #333333">];</span>
+  <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">headIndex</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">tailIndex</span> <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+ <span style="color: #333333">}</span>
+
+ <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Enqueue will input and store data at the back of the queue </span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @param1: data to be inputted</span>
+<span style="color: #888888">  * @rvalue: boolean denoting the success of the insertion</span>
+<span style="color: #888888">  */</span>
+ <span style="color: #555555; font-weight: bold">@Override</span>
+ <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">enqueue</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>isFull<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+   <span style="color: #888888">//taking the tail index modulo total size allows us to &quot;wrap around&quot; the fixed size array</span>
+   q<span style="color: #333333">[</span>tailIndex <span style="color: #333333">%</span> totalSize<span style="color: #333333">]</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+   tailIndex<span style="color: #333333">++;</span>
+   <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+ <span style="color: #333333">}</span>
+
+
+ <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Dequeue will remove and return data from the head of the queue</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: data at the &quot;front&quot; or head of the list (remember FIFO ds)</span>
+<span style="color: #888888">  */</span>
+ <span style="color: #555555; font-weight: bold">@Override</span>
+ <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">dequeue</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+   <span style="color: #888888">//No need to even clear the indices, they will be written over as the queue wraps around the array</span>
+   T data <span style="color: #333333">=</span> q<span style="color: #333333">[</span>headIndex <span style="color: #333333">%</span> totalSize<span style="color: #333333">];</span>
+   headIndex<span style="color: #333333">++;</span>
+   <span style="color: #008800; font-weight: bold">return</span> data<span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+ <span style="color: #333333">}</span>
+
+ <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Peek will return data at the head index without actually removing it </span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: data at the &quot;front&quot; or head of the list </span>
+<span style="color: #888888">  */</span>
+ <span style="color: #555555; font-weight: bold">@Override</span>
+ <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peek</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">return</span> q<span style="color: #333333">[</span>headIndex <span style="color: #333333">%</span> totalSize<span style="color: #333333">];</span>
+  <span style="color: #333333">}</span>
+ <span style="color: #333333">}</span>
+
+ <span style="color: #888888">/*</span>
+<span style="color: #888888">  * We know the entire array has been filled if adding one more to the head brings us to the same index as the tail</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  */</span>
+ <span style="color: #555555; font-weight: bold">@Override</span>
+ <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">((</span>headIndex <span style="color: #333333">%</span> totalSize<span style="color: #333333">)</span> <span style="color: #333333">==</span> <span style="color: #333333">(</span>tailIndex <span style="color: #333333">%</span> totalSize<span style="color: #333333">)</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">);</span>
+ <span style="color: #333333">}</span>
+
+
+ <span style="color: #888888">/*</span>
+<span style="color: #888888">  *We know the array is empty if that tail index is equal to the head index</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  */</span>
+ <span style="color: #555555; font-weight: bold">@Override</span>
+ <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isEmpty</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>headIndex <span style="color: #333333">==</span> tailIndex<span style="color: #333333">);</span>
+ <span style="color: #333333">}</span>
+
+ <span style="color: #888888">//Sample run to test the expected functionality</span>
+ <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> Exception <span style="color: #333333">{</span>
+  <span style="color: #888888">//Initializing a new queue holding strings of the fixed size 5</span>
+  ArrayImplOfQueue <span style="color: #333333">&lt;</span> String <span style="color: #333333">&gt;</span> q <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> ArrayImplOfQueue <span style="color: #333333">&lt;</span> String <span style="color: #333333">&gt;</span> <span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">);</span>
+  <span style="color: #888888">//crude but convenient tests</span>
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">for</span> <span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+   q<span style="color: #333333">.</span><span style="color: #0000CC">enqueue</span><span style="color: #333333">(</span>i <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeue</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #333399; font-weight: bold">boolean</span> didFail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+  <span style="color: #008800; font-weight: bold">for</span> <span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+   didFail <span style="color: #333333">=</span> <span style="color: #333333">!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">enqueue</span><span style="color: #333333">(</span>Integer<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>i<span style="color: #333333">));</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>didFail<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeue</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+   <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+  <span style="color: #333333">}</span>
+
+  System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Queue works as expected, nice job!&quot;</span><span style="color: #333333">);</span>
+
+ <span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>
+
+
+
+
+<h2> Queue Linked-List Implementation </h2>
+
+
+
+
+<h2> Stack Array Implementation </h2>
+
+
+
+
+<h2> Stack Linked-List Implementation </h2>
+
+
+
+
+<h2> Dequeue Linked-List Implementation </h2>
