@@ -115,6 +115,9 @@
 		margin-top: 50px;
 		width: auto;
 		height: auto;
+    h4 {
+      text-align: center;
+    }
 	}
 
 	#clrs-wrapper {
@@ -247,6 +250,10 @@
 
 .modal-header {
 	background: #3498db;
+}
+
+h4 {
+  text-align: center;
 }
 
 .modal-header h4 {
