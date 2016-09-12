@@ -1,0 +1,265 @@
+<button type="button" class="btn btn-default back-button" aria-label="Left Align">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</button>
+
+
+
+<h1 style:"margin-top:100px;"> <strong> Distribution Sorts </strong> </h1>
+
+
+
+<h2 style="margin-left:100px;"> Radix Sort O(dn) </h2>
+
+
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//Radix sort is non-comparison sorting algorithm that operations in O(dn) d being the most number of digits contained in each number</span>
+<span style="color: #888888">//There are multiple flavors of Radix sort, however this is an instance of the least significant digit implementation</span>
+<span style="color: #888888">//where each digit is sorted into buckets based on consecutive digits (in place) from the least significant digit.</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Deque</span><span style="color: #333333">;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.LinkedList</span><span style="color: #333333">;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Arrays</span><span style="color: #333333">;</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">RadixSort</span><span style="color: #333333">{</span>
+	<span style="color: #888888">//0-9 buckets that contain each symbol (number in this case) to be sorted</span>
+	Deque<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;[]</span> buckets<span style="color: #333333">;</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">RadixSort</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+		buckets <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LinkedList<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">];</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span> i<span style="color: #333333">++){</span>
+			buckets<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LinkedList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;();</span>
+		<span style="color: #333333">}</span>
+
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> <span style="color: #0066BB; font-weight: bold">sort</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		<span style="color: #333399; font-weight: bold">int</span> currentDigit <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span>
+		<span style="color: #333399; font-weight: bold">int</span> bucketDenom <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span>
+		<span style="color: #333399; font-weight: bold">boolean</span> digitsConsumed <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+		<span style="color: #333399; font-weight: bold">int</span> maxNumber <span style="color: #333333">=</span> Integer<span style="color: #333333">.</span><span style="color: #0000CC">MIN_VALUE</span><span style="color: #333333">;</span>
+		
+		<span style="color: #888888">//non-negative digit sorting</span>
+		<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(!</span>digitsConsumed<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			<span style="color: #888888">//go through array and arrange least significant digits</span>
+			<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">:</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>i <span style="color: #333333">&gt;</span> maxNumber<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+					maxNumber <span style="color: #333333">=</span> i<span style="color: #333333">;</span>
+				<span style="color: #333333">}</span>
+				<span style="color: #333399; font-weight: bold">int</span> bucket <span style="color: #333333">=</span> Math<span style="color: #333333">.</span><span style="color: #0000CC">abs</span><span style="color: #333333">(</span>i<span style="color: #333333">)</span> <span style="color: #333333">%</span> currentDigit<span style="color: #333333">;</span>
+				bucket <span style="color: #333333">/=</span> bucketDenom<span style="color: #333333">;</span>
+				buckets<span style="color: #333333">[</span>bucket<span style="color: #333333">].</span><span style="color: #0000CC">addLast</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+			<span style="color: #333333">}</span>
+
+			<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>maxNumber <span style="color: #333333">-</span> currentDigit <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				digitsConsumed <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+			<span style="color: #333333">}</span>
+
+			<span style="color: #888888">//go through buckets in proper order to reconstruct array for next passing</span>
+			<span style="color: #333399; font-weight: bold">int</span> k <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+			<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span>i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+				<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>buckets<span style="color: #333333">[</span>i<span style="color: #333333">].</span><span style="color: #0000CC">peek</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+					<span style="color: #333399; font-weight: bold">int</span> nextInOrder <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span>i<span style="color: #333333">].</span><span style="color: #0000CC">removeFirst</span><span style="color: #333333">();</span>
+					arr<span style="color: #333333">[</span>k<span style="color: #333333">]</span> <span style="color: #333333">=</span> nextInOrder<span style="color: #333333">;</span>
+					k<span style="color: #333333">++;</span>
+				<span style="color: #333333">}</span>
+			<span style="color: #333333">}</span>
+
+			<span style="color: #888888">//move to the next significant digit</span>
+			currentDigit <span style="color: #333333">*=</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span>
+			bucketDenom <span style="color: #333333">*=</span> <span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #888888">//sorting on the sign, using 0 bucket for negatives and 1 bucket for positive</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">:</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>i <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				<span style="color: #888888">//original order needs to be reversed since smaller numbers coorelate to larger negative numbers</span>
+				buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">].</span><span style="color: #0000CC">addFirst</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+			<span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+				buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">].</span><span style="color: #0000CC">addLast</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+			<span style="color: #333333">}</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #888888">//restore original array including negatives</span>
+		<span style="color: #333399; font-weight: bold">int</span> k <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">].</span><span style="color: #0000CC">peek</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			arr<span style="color: #333333">[</span>k<span style="color: #333333">]</span> <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">].</span><span style="color: #0000CC">removeFirst</span><span style="color: #333333">();</span>
+			k<span style="color: #333333">++;</span>
+		<span style="color: #333333">}</span>
+		<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">].</span><span style="color: #0000CC">peek</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			arr<span style="color: #333333">[</span>k<span style="color: #333333">]</span> <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">].</span><span style="color: #0000CC">removeFirst</span><span style="color: #333333">();</span>
+			k<span style="color: #333333">++;</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #008800; font-weight: bold">return</span> arr<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		RadixSort s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> RadixSort<span style="color: #333333">();</span>
+		<span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> test <span style="color: #333333">=</span> s<span style="color: #333333">.</span><span style="color: #0000CC">sort</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]{</span><span style="color: #0000DD; font-weight: bold">33</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">10000</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">3</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">,-</span><span style="color: #0000DD; font-weight: bold">50</span><span style="color: #333333">,-</span><span style="color: #0000DD; font-weight: bold">15</span><span style="color: #333333">,-</span><span style="color: #0000DD; font-weight: bold">1234123</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">12341</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">12341</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">23</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">43432</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">2342</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">112</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">234</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">1003</span><span style="color: #333333">});</span>
+		System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span>Arrays<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>test<span style="color: #333333">));</span>
+	<span style="color: #333333">}</span>
+
+<span style="color: #333333">}</span>
+</pre></div>
+
+
+<h2 style="margin-left:100px;"> Bucket Sort O(n+k) Expected </h2>
+
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//Bucket sort is a sorting algorithm that takes advantage of the distribution of the given data set to make sorting happen in O(n+k) average time, where k is the number of buckets created</span>
+<span style="color: #888888">//The sorting algo is meant to work with numbers that are uniformly distributed (randomly) over [0,1)</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Arrays</span><span style="color: #333333">;</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">BucketSort</span> <span style="color: #333333">{</span>
+	Node<span style="color: #333333">[]</span> buckets<span style="color: #333333">;</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> <span style="color: #0066BB; font-weight: bold">sort</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		createBuckets<span style="color: #333333">(</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">,</span> <span style="color: #0000DD; font-weight: bold">9</span><span style="color: #333333">);</span>
+
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">double</span> i <span style="color: #333333">:</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			<span style="color: #333399; font-weight: bold">int</span> bucket <span style="color: #333333">=</span> <span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">)</span> Math<span style="color: #333333">.</span><span style="color: #0000CC">floor</span><span style="color: #333333">(</span><span style="color: #6600EE; font-weight: bold">10.0</span><span style="color: #333333">*</span>i<span style="color: #333333">);</span>
+			insertInBucket<span style="color: #333333">(</span>bucket<span style="color: #333333">,</span> i<span style="color: #333333">);</span>
+		<span style="color: #333333">}</span>
+		sortEachBucket<span style="color: #333333">();</span>
+		<span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> sorted <span style="color: #333333">=</span> cocatenateBuckets<span style="color: #333333">(</span>arr<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">);</span>
+		<span style="color: #008800; font-weight: bold">return</span> sorted<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">createBuckets</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> firstBucket<span style="color: #333333">,</span> <span style="color: #333399; font-weight: bold">int</span> lastBucket<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		buckets <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Node<span style="color: #333333">[</span>lastBucket<span style="color: #333333">-</span>firstBucket<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">];</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> <span style="color: #0066BB; font-weight: bold">cocatenateBuckets</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> length<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		<span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> sorted <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[</span>length<span style="color: #333333">];</span>
+		<span style="color: #333399; font-weight: bold">int</span> k <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span>buckets<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+			<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>buckets<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				Node n <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span>i<span style="color: #333333">];</span>
+				sorted<span style="color: #333333">[</span>k<span style="color: #333333">]</span> <span style="color: #333333">=</span> n<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+				k<span style="color: #333333">++;</span>
+				buckets<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">=</span> n<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">;</span>
+			<span style="color: #333333">}</span>
+		<span style="color: #333333">}</span>
+		<span style="color: #008800; font-weight: bold">return</span> sorted<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">insertInBucket</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> bucket<span style="color: #333333">,</span> <span style="color: #333399; font-weight: bold">double</span> element<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>buckets<span style="color: #333333">[</span>bucket<span style="color: #333333">]</span> <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			Node insert <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Node<span style="color: #333333">(</span>element<span style="color: #333333">);</span>
+			buckets<span style="color: #333333">[</span>bucket<span style="color: #333333">]=</span> insert<span style="color: #333333">;</span>
+		<span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+			Node insert <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Node<span style="color: #333333">(</span>element<span style="color: #333333">);</span>
+			Node current <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span>bucket<span style="color: #333333">];</span>
+			insert<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> current<span style="color: #333333">;</span>
+			current<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> insert<span style="color: #333333">;</span>
+			buckets<span style="color: #333333">[</span>bucket<span style="color: #333333">]</span> <span style="color: #333333">=</span> insert<span style="color: #333333">;</span>
+		<span style="color: #333333">}</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #888888">//insertion sort for linked lists</span>
+	<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">sortEachBucket</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span>buckets<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+			Node k <span style="color: #333333">=</span> buckets<span style="color: #333333">[</span>i<span style="color: #333333">];</span>
+			<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>k <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span> <span style="color: #333333">&amp;&amp;</span> k<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">!=</span><span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				k <span style="color: #333333">=</span> k<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">;</span>
+				Node n <span style="color: #333333">=</span> k<span style="color: #333333">;</span>
+				<span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span>n <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span> <span style="color: #333333">&amp;&amp;</span> n<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span> <span style="color: #333333">&amp;&amp;</span> n<span style="color: #333333">.</span><span style="color: #0000CC">prev</span><span style="color: #333333">.</span><span style="color: #0000CC">data</span> <span style="color: #333333">&gt;</span> n<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+					<span style="color: #888888">//if swapping head, must change array index reference as well</span>
+					<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>n<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">==</span> buckets<span style="color: #333333">[</span>i<span style="color: #333333">])</span> <span style="color: #333333">{</span>
+						buckets<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">=</span> n<span style="color: #333333">;</span>
+					<span style="color: #333333">}</span>
+					swap<span style="color: #333333">(</span>n<span style="color: #333333">,</span> n<span style="color: #333333">.</span><span style="color: #0000CC">prev</span><span style="color: #333333">);</span>
+					n <span style="color: #333333">=</span> n<span style="color: #333333">.</span><span style="color: #0000CC">prev</span><span style="color: #333333">;</span>
+				<span style="color: #333333">}</span>
+			<span style="color: #333333">}</span>
+		<span style="color: #333333">}</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #888888">//swapping two doubly-linked nodes</span>
+	<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">swap</span><span style="color: #333333">(</span>Node n1<span style="color: #333333">,</span> Node n2<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		Node next <span style="color: #333333">=</span> n1<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">;</span>
+		Node prev <span style="color: #333333">=</span> n2<span style="color: #333333">.</span><span style="color: #0000CC">prev</span><span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>prev <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			prev<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> n1<span style="color: #333333">;</span>
+		<span style="color: #333333">}</span>
+		<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>next <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			next<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> n2<span style="color: #333333">;</span>
+		<span style="color: #333333">}</span>
+		n1<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> prev<span style="color: #333333">;</span>
+		n1<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> n2<span style="color: #333333">;</span>
+		n2<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> next<span style="color: #333333">;</span>
+		n2<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> n1<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                BucketSort s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> BucketSort<span style="color: #333333">();</span>
+		<span style="color: #888888">//example pulled from CLRS pg.201</span>
+                <span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]</span> test <span style="color: #333333">=</span> s<span style="color: #333333">.</span><span style="color: #0000CC">sort</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">double</span><span style="color: #333333">[]{.</span><span style="color: #0000DD; font-weight: bold">78</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">17</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">39</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">26</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">72</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">94</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">21</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">12</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">23</span><span style="color: #333333">,.</span><span style="color: #0000DD; font-weight: bold">68</span><span style="color: #333333">});</span>
+                System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span>Arrays<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>test<span style="color: #333333">));</span>
+        <span style="color: #333333">}</span>   
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Node</span> <span style="color: #333333">{</span>
+		<span style="color: #008800; font-weight: bold">public</span> Node prev<span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">public</span> Node next<span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">double</span> data<span style="color: #333333">;</span>
+
+		<span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">Node</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">double</span> data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			<span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">data</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+		<span style="color: #333333">}</span>
+	<span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>
+
+
+<h2 style="margin-left:100px;"> Counting Sort O(n) time and O(n+k) space</h2>
+
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//Counting sort is a linear sorting algorithm that works in O(n) time efficiency and O(n+k) space efficiency, where k is the range of input</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Arrays</span><span style="color: #333333">;</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">CountingSort</span> <span style="color: #333333">{</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> arr<span style="color: #333333">;</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">CountingSort</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		<span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">arr</span> <span style="color: #333333">=</span> arr<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> <span style="color: #0066BB; font-weight: bold">sort</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		<span style="color: #888888">//make array that holds the frequency of elements in original unsorted array</span>
+		<span style="color: #333399; font-weight: bold">int</span> max <span style="color: #333333">=</span> Integer<span style="color: #333333">.</span><span style="color: #0000CC">MIN_VALUE</span><span style="color: #333333">;</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> <span style="color: #997700; font-weight: bold">i:</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>i <span style="color: #333333">&gt;</span> max<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+				max <span style="color: #333333">=</span> i<span style="color: #333333">;</span>
+			<span style="color: #333333">}</span>
+		<span style="color: #333333">}</span>
+		<span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> frequencies <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[</span>max<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">];</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> <span style="color: #997700; font-weight: bold">i:</span> arr<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+			frequencies<span style="color: #333333">[</span>i<span style="color: #333333">]++;</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #888888">//make a cumulative array out of these frequencies, which represents the index in the final sorted array</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span>i<span style="color: #333333">&lt;</span>frequencies<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span>i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+			frequencies<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">+=</span> frequencies<span style="color: #333333">[</span>i<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">];</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #888888">//going through original (unsorted) array backwards, we can look up the final index in the cumulative array</span>
+		<span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> sortedArray <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[</span>arr<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">];</span>
+		<span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span>arr<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span>i<span style="color: #333333">&gt;=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>i<span style="color: #333333">--)</span> <span style="color: #333333">{</span>
+			<span style="color: #333399; font-weight: bold">int</span> index <span style="color: #333333">=</span> frequencies<span style="color: #333333">[</span>arr<span style="color: #333333">[</span>i<span style="color: #333333">]];</span>
+			sortedArray<span style="color: #333333">[</span>index<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">]</span> <span style="color: #333333">=</span> arr<span style="color: #333333">[</span>i<span style="color: #333333">];</span>
+			frequencies<span style="color: #333333">[</span>arr<span style="color: #333333">[</span>i<span style="color: #333333">]]--;</span>
+		<span style="color: #333333">}</span>
+
+		<span style="color: #008800; font-weight: bold">return</span> sortedArray<span style="color: #333333">;</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> <span style="color: #0066BB; font-weight: bold">sort</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+		<span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">sort</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">arr</span><span style="color: #333333">);</span>
+	<span style="color: #333333">}</span>
+
+	<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+		CountingSort s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> CountingSort<span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> <span style="color: #333333">{</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">9</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">8</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">7</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">60</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">,</span><span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">});</span>
+		System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span>Arrays<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">sort</span><span style="color: #333333">()));</span>
+	<span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>

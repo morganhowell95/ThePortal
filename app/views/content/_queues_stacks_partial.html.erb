@@ -4,12 +4,13 @@
 
 
 <h1> <strong> Queues and Stacks </strong> </h1>
+
 <hr>
 <iframe width="560" height="315" class="tutvideo" src="https://www.youtube.com/embed/YRWjgZ4xzSo" frameborder="0" allowfullscreen></iframe>
 <hr>
 
 
-<h2> Queue (Array Implementation)</h2>
+<h2 style="margin-left:100px;"> Queue (Array Implementation)</h2>
 
 <div class="src-code" style="background: #ffffff; overflow:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//A queue is a First In First Out (FIFO) data structure</span>
 <span style="color: #888888">//Java gives a much more in-depth perspective for the array implementation of both the queue and stack</span>
@@ -151,19 +152,718 @@
 
 
 
-<h2> Queue Linked-List Implementation </h2>
+<h2 style="margin-left:100px;"> Queue Linked-List Implementation </h2>
+
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888"> * Linked list implementation of a Queue in Java which serves as a much better learning experience as compared</span>
+<span style="color: #888888"> * to this data structure in Python. The Queue is a First In First Out (FIFO) data structure.</span>
+<span style="color: #888888"> * Every operation is done in constant time, however O(n) space complexity.</span>
+<span style="color: #888888"> */</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">LLImplOfQueue</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #008800; font-weight: bold">implements</span> Queue<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">private</span> Node head<span style="color: #333333">;</span>
+  <span style="color: #008800; font-weight: bold">private</span> Node tail<span style="color: #333333">;</span>
+
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">LLImplOfQueue</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    tail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Stores the generic data element in the back (or tail) of the queue in constant time</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">enqueue</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Node<span style="color: #333333">(</span>data<span style="color: #333333">);</span>
+      tail <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      tail<span style="color: #333333">.</span><span style="color: #0000CC">setNext</span><span style="color: #333333">(</span><span style="color: #008800; font-weight: bold">new</span> Node<span style="color: #333333">(</span>data<span style="color: #333333">));</span>
+      tail <span style="color: #333333">=</span> tail<span style="color: #333333">.</span><span style="color: #0000CC">getNext</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Returns the element at the front (or head) in a First In First Out (FIFO) fashion</span>
+<span style="color: #888888">  * The tail pointer points to the most recently inserted element, whereas the head points to the last</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">dequeue</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      T data <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">getData</span><span style="color: #333333">();</span>
+      head <span style="color: #333333">=</span> head<span style="color: #333333">.</span><span style="color: #0000CC">getNext</span><span style="color: #333333">();</span>
+      <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>head <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+        tail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #333333">}</span>
+      <span style="color: #008800; font-weight: bold">return</span> data<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * View the element sitting in the front (head) without adjusting the pointers</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peek</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">getData</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Check to see if the queue is empty</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isEmpty</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>head <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">(</span>tail <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * May be required if the interface you implement has the method, but the linked list implementation should</span>
+<span style="color: #888888">  * not get full anytime soon.</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">//Inner class: https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html</span>
+  <span style="color: #888888">//Represents each node of the linked list which we make a functional queue</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Node</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">private</span> T data<span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">private</span> Node next<span style="color: #333333">;</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">Node</span><span style="color: #333333">(</span>T data<span style="color: #333333">){</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">data</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">getData</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> data<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> Node <span style="color: #0066BB; font-weight: bold">getNext</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> next<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">setNext</span><span style="color: #333333">(</span>Node n<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> n<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>   
+  <span style="color: #333333">}</span>
+  
+   <span style="color: #888888">//Sample run to test the expected functionality</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> Exception <span style="color: #333333">{</span>
+
+                LLImplOfQueue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> q <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LLImplOfQueue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;();</span>
+                <span style="color: #888888">//crude but convenient tests </span>
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                        q<span style="color: #333333">.</span><span style="color: #0000CC">enqueue</span><span style="color: #333333">(</span>i <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">);</span>
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span> 
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeue</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span> 
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+      q<span style="color: #333333">.</span><span style="color: #0000CC">enqueue</span><span style="color: #333333">(</span>Integer<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>i<span style="color: #333333">));</span>
+                <span style="color: #333333">}</span>       
+                
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeue</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">()){</span>
+      String data <span style="color: #333333">=</span> q<span style="color: #333333">.</span><span style="color: #0000CC">dequeue</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+                System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Queue works as expected, nice job!&quot;</span><span style="color: #333333">);</span>
+
+  <span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>
 
 
 
+<h2 style="margin-left:100px;"> Stack Array Implementation </h2>
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888"> * A stack is a Last In First Out (LIFO) data structure</span>
+<span style="color: #888888"> * The Java implementation of a stack gives a much more comprehensive understanding of the concept as compared to the Pythonic Solution</span>
+<span style="color: #888888"> */</span>
+<span style="color: #888888">//**Note: since we implemented the &quot;wrapping&quot; mechanism in the queue example and it would be the same exact implementation for the stack, we are going to experiment with what a &quot;growing&quot; dynamic array would look like</span>
 
-<h2> Stack Array Implementation </h2>
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">ArrayImplOfStack</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #008800; font-weight: bold">implements</span> Stack<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">private</span> T<span style="color: #333333">[]</span> s<span style="color: #333333">;</span> 
+  <span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">int</span> currentSize<span style="color: #333333">;</span>
+
+  <span style="color: #555555; font-weight: bold">@SuppressWarnings</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;unchecked&quot;</span><span style="color: #333333">)</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">ArrayImplOfStack</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">currentSize</span> <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+    <span style="color: #888888">//default size that will grow dynamically</span>
+    <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">s</span> <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">[])</span> <span style="color: #008800; font-weight: bold">new</span> Object<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">30</span><span style="color: #333333">];</span>
+  <span style="color: #333333">}</span>
+  
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Add data item to end of currentSize</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: success of adding element</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">push</span><span style="color: #333333">(</span>T data<span style="color: #333333">){</span>
+    <span style="color: #888888">//grow array if it can&#39;t currently hold additional elements</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isFull<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      growDynamically<span style="color: #333333">();</span>
+    <span style="color: #333333">}</span> 
+    s<span style="color: #333333">[</span>currentSize<span style="color: #333333">++]</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">return</span> s<span style="color: #333333">[</span>currentSize<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">]</span> <span style="color: #333333">==</span> data<span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Take last inputted element (LIFO) style and decrement index</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: last inputted element</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">pop</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> s<span style="color: #333333">[--</span>currentSize<span style="color: #333333">];</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * Return last element inserted (LIFO) style however do not remove it</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: last inputted element</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peek</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> s<span style="color: #333333">[</span>currentSize<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">];</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888"> * Grow the array by a factor of two</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> * @rvalue: return the success state of the grow</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> */</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">growDynamically</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #555555; font-weight: bold">@SuppressWarnings</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;unchecked&quot;</span><span style="color: #333333">)</span>
+    T<span style="color: #333333">[]</span> t <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">[])</span> <span style="color: #008800; font-weight: bold">new</span> Object<span style="color: #333333">[</span>s<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">*</span><span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">];</span>
+    <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span>s<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+      t<span style="color: #333333">[</span>i<span style="color: #333333">]</span> <span style="color: #333333">=</span> s<span style="color: #333333">[</span>i<span style="color: #333333">];</span>
+    <span style="color: #333333">}</span>
+    s <span style="color: #333333">=</span> t<span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Check whether the Stack has reached its maximum capacity</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: boolean deeming if the Stack has maximum number of elements</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> currentSize<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">==</span> s<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Check if the Stack contains no data</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: boolean with the status of Stack&#39;s emptiness</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isEmpty</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> currentSize <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> Exception <span style="color: #333333">{</span>
+    ArrayImplOfStack<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> ArrayImplOfStack<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;();</span>
+
+    <span style="color: #888888">//crude tests are better than no tests</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">100</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+      s<span style="color: #333333">.</span><span style="color: #0000CC">push</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">pop</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">98</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Stack works exactly as expected, but you should write some better testers.&quot;</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+
+<span style="color: #333333">}</span>
+</pre></div>
 
 
 
+<h2 style="margin-left:100px;"> Stack Linked-List Implementation </h2>
 
-<h2> Stack Linked-List Implementation </h2>
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888"> * Linked list implementation of a stack, which is a Last In First Out (LIFO) data structure.</span>
+<span style="color: #888888"> * The java solution offers a more comprehensive understanding of the underlying functionality as compared</span>
+<span style="color: #888888"> * to the Pythonic solution. All operations are done in constant O(1) time.</span>
+<span style="color: #888888"> */</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">LLImplOfStack</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #008800; font-weight: bold">implements</span> Stack<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">private</span> Node head<span style="color: #333333">;</span>
+
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">LLImplOfStack</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* Adds the element to the back (head) of the list which is the next to be removed in a LIFO fashion.</span>
+<span style="color: #888888">  * Makes more conceptual sense to think of the list being built &quot;backwards&quot;: head-&gt;x-&gt;x-&gt;x-&gt;tail</span>
+<span style="color: #888888">  * </span>
+<span style="color: #888888">  * @param1: arbitrary data to be stored</span>
+<span style="color: #888888">  * @rvalue: return successful storage</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">push</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      Node currentHead <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+      head<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> currentHead<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* Pops (or removes) element from the head of the list which is the most recently inputted element then</span>
+<span style="color: #888888">  * the pointer will increment &quot;forward&quot; in the list (if you think of the list being build backwards with head</span>
+<span style="color: #888888">  * incrementing forward upon a removal). All operations are done in constant time.</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: data sitting at head of list (at the back)</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">pop</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      T data <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+      head <span style="color: #333333">=</span> head<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> data<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* View the last inputted element at the back of the list without incermenting the pointers</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: data sitting at the head of list (at the back)</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peek</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* Check to see if the list has been populated yet</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: boolean that says whether the list is empty or not</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isEmpty</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>head <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* Check to see if the list is full, shouldn&#39;t happen anytime soon with the linked list implementation */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+
+  <span style="color: #888888">//Inner-class representing a node of the linked list where the arbitrary data is stored</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Node</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">public</span> T data<span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">public</span> Node next<span style="color: #333333">;</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">Node</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">data</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> Exception <span style="color: #333333">{</span>
+                LLImplOfStack<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LLImplOfStack<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;();</span>
+
+                <span style="color: #888888">//crude tests are better than no tests</span>
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">100</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                        s<span style="color: #333333">.</span><span style="color: #0000CC">push</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">pop</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peek</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">98</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(!</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      s<span style="color: #333333">.</span><span style="color: #0000CC">pop</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+                System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Stack works exactly as expected, but you should write some better testers.&quot;</span><span style="color: #333333">);</span>
+        <span style="color: #333333">}</span>
+
+
+<span style="color: #333333">}</span>
+</pre></div>
 
 
 
+<h2 style="margin-left:100px;"> Dequeue Linked-List Implementation </h2>
 
-<h2> Dequeue Linked-List Implementation </h2>
+
+<div class="src-code" style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888"> * A double-ended queue (dequeue, often abbreviated to deque, pronounced deck) is an abstract data type that generalizes a </span>
+<span style="color: #888888"> * queue, for which elements can be added to or removed from either the front (head) or back (tail).</span>
+<span style="color: #888888"> * It is also often called a head-tail linked list, though properly this refers to this specific implementation which uses </span>
+<span style="color: #888888"> * a linked list for internal storage, as opposed to an array as seen in the other examples. All operations are constant time O(1) with linear space complexity O(N)</span>
+<span style="color: #888888"> */</span>
+
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">LLImplOfDequeue</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #008800; font-weight: bold">implements</span> Dequeue<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+  <span style="color: #008800; font-weight: bold">private</span> Node tail<span style="color: #333333">;</span>
+  <span style="color: #008800; font-weight: bold">private</span> Node head<span style="color: #333333">;</span>
+
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">LLImplOfDequeue</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    tail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/* </span>
+<span style="color: #888888">  * Add an element to the front of the deque, at the head, which would be the next element to be dequeued</span>
+<span style="color: #888888">  * in a normal queue. Would also be the next element to be popped if using the deque as a stack. Thus, use this </span>
+<span style="color: #888888">  * method in conjunction with the dequeueFront() method to make a functional stack.</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">         * @param1: the data to be put at the head (front of queue)</span>
+<span style="color: #888888">  * @rvalue: boolean denoting success of insertion</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">enqueueFront</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+      tail <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      Node prevHead <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+      head<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> prevHead<span style="color: #333333">;</span>
+      prevHead<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Add an element to the back of the deque, which would make it the last one to be dequeued if it were a normal queue,</span>
+<span style="color: #888888">  * thus incrementing the tail pointer. This should make it obvious for why we need double linked lists instead of </span>
+<span style="color: #888888">  * singly linked at this point, because we need the ability to &quot;decrement&quot; the tail or move backwards after </span>
+<span style="color: #888888">  * incrementing forward to stay within a constant time operations O(1). This method would be used in conjunction with</span>
+<span style="color: #888888">  * the dequeueFront() method to make a normal queue operation.</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @param1: the data to be inserted at the tail</span>
+<span style="color: #888888">  * @rvalue: boolean denoting success of insertion</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">enqueueBack</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+      tail <span style="color: #333333">=</span> head<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      Node prevTail <span style="color: #333333">=</span> tail<span style="color: #333333">;</span>
+      tail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">new</span> Node<span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;(</span>data<span style="color: #333333">);</span>
+      tail<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> prevTail<span style="color: #333333">;</span>
+      prevTail<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> tail<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  *  Removes the element from the front, at the head pointer, which would be equivalent to a stack&#39;s pop operation used</span>
+<span style="color: #888888">  *  in conjunction with the enqueueFront() method. The head pointer will increment forward, via next, the forward -&gt;</span>
+<span style="color: #888888">  *  link in constant time.</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  *  rvalue: data sitting at the head pointer, front or left of the list</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+  <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">dequeueFront</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      T data <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+      head <span style="color: #333333">=</span> head<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>head <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">){</span>
+        tail <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+        head<span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #333333">}</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> data<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Removes element from the back, at the tail pointer.</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: data sitting at the end, at the tail pointer, to the right most point of the list</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">dequeueBack</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      T data <span style="color: #333333">=</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> tail<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+      tail <span style="color: #333333">=</span> tail<span style="color: #333333">.</span><span style="color: #0000CC">prev</span><span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>tail <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">){</span>
+        head <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+        tail<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #333333">}</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> data<span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Fetch the element at the head pointer, front of the list, without actually incrementing any pointers</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: element at the front of the list</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peekFront</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> head<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Fetch the element at the tail pointer, back of the list, without actually decrementing any pointers</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: element at the back of the list</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> T <span style="color: #0066BB; font-weight: bold">peekBack</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>isEmpty<span style="color: #333333">()){</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>T<span style="color: #333333">)</span> tail<span style="color: #333333">.</span><span style="color: #0000CC">data</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Checks whether the deque is empty or not</span>
+<span style="color: #888888">  *</span>
+<span style="color: #888888">  * @rvalue: boolean denoting whether the list is empty or not</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isEmpty</span><span style="color: #333333">()</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #333333">(</span>tail<span style="color: #333333">==</span><span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">)</span> <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">(</span>head<span style="color: #333333">==</span><span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">  * Check whether the deque is full, which shouldn&#39;t happen in the linked list implementation.</span>
+<span style="color: #888888">  * If you would like to see the array implementation of the dequeue, please just shoot me a message</span>
+<span style="color: #888888">  * and I would be more than happy to provide it (using a circular buffer or dynamic sizing)</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #555555; font-weight: bold">@Override</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">isFull</span><span style="color: #333333">(){</span>
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+  <span style="color: #333333">}</span>
+
+
+  <span style="color: #888888">/* Internal data storage object which links to other Node objects to create doubly linked lists */</span>
+  <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Node</span><span style="color: #333333">&lt;</span>T<span style="color: #333333">&gt;</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">public</span> Node next<span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">public</span> Node prev<span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">public</span> T data<span style="color: #333333">;</span>
+
+    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">Node</span><span style="color: #333333">(</span>T data<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">data</span> <span style="color: #333333">=</span> data<span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+      <span style="color: #008800; font-weight: bold">this</span><span style="color: #333333">.</span><span style="color: #0000CC">prev</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+  <span style="color: #333333">}</span>
+
+  <span style="color: #888888">//Sample run to test the expected functionality</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">static</span> <span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">main</span><span style="color: #333333">(</span>String<span style="color: #333333">[]</span> args<span style="color: #333333">)</span> <span style="color: #008800; font-weight: bold">throws</span> Exception <span style="color: #333333">{</span>
+
+    <span style="color: #888888">//TEST-&gt; treating the deque as a queue</span>
+                LLImplOfDequeue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> q <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LLImplOfDequeue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;();</span>
+                <span style="color: #888888">//crude but convenient tests </span>
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                        q<span style="color: #333333">.</span><span style="color: #0000CC">enqueueBack</span><span style="color: #333333">(</span>i <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">);</span>
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peekFront</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span> 
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeueFront</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;0hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">peekFront</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span> 
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">10</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                        q<span style="color: #333333">.</span><span style="color: #0000CC">enqueueBack</span><span style="color: #333333">(</span>Integer<span style="color: #333333">.</span><span style="color: #0000CC">toString</span><span style="color: #333333">(</span>i<span style="color: #333333">));</span>
+                <span style="color: #333333">}</span>    
+    
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>q<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">()</span> <span style="color: #333333">!=</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>q<span style="color: #333333">.</span><span style="color: #0000CC">dequeueFront</span><span style="color: #333333">().</span><span style="color: #0000CC">equals</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;1hello&quot;</span><span style="color: #333333">))</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+    System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Deque can function as a queue&quot;</span><span style="color: #333333">);</span>
+
+    <span style="color: #888888">//TEST-&gt; treating the deque as a stack</span>
+                LLImplOfDequeue<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> s <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LLImplOfDequeue<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;();</span>
+
+                <span style="color: #888888">//crude tests are better than no tests</span>
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">100</span><span style="color: #333333">;</span> i<span style="color: #333333">++)</span> <span style="color: #333333">{</span>
+                        s<span style="color: #333333">.</span><span style="color: #0000CC">enqueueFront</span><span style="color: #333333">(</span>i<span style="color: #333333">);</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">isFull</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peekFront</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">dequeueFront</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">99</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>s<span style="color: #333333">.</span><span style="color: #0000CC">peekFront</span><span style="color: #333333">()!=</span><span style="color: #0000DD; font-weight: bold">98</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+                        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+                <span style="color: #333333">}</span>   
+
+                System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Your deque has the ability to function just like a stack, time for the ultimate test?&quot;</span><span style="color: #333333">);</span>
+
+    LLImplOfDequeue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;</span> d <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> LLImplOfDequeue<span style="color: #333333">&lt;</span>String<span style="color: #333333">&gt;();</span>
+    d<span style="color: #333333">.</span><span style="color: #0000CC">enqueueFront</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">);</span>
+    d<span style="color: #333333">.</span><span style="color: #0000CC">enqueueFront</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;yo&quot;</span><span style="color: #333333">);</span>
+    d<span style="color: #333333">.</span><span style="color: #0000CC">enqueueFront</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;whatsup&quot;</span><span style="color: #333333">);</span>
+    d<span style="color: #333333">.</span><span style="color: #0000CC">enqueueBack</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;uhoh&quot;</span><span style="color: #333333">);</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">peekFront</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;whatsup&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">peekBack</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;uhoh&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">dequeueBack</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;uhoh&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">peekBack</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">dequeueBack</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>d<span style="color: #333333">.</span><span style="color: #0000CC">dequeueFront</span><span style="color: #333333">()!=</span><span style="background-color: #fff0f0">&quot;whatsup&quot;</span><span style="color: #333333">)</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    d<span style="color: #333333">.</span><span style="color: #0000CC">dequeueBack</span><span style="color: #333333">();</span>
+
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>d<span style="color: #333333">.</span><span style="color: #0000CC">isEmpty</span><span style="color: #333333">())</span> <span style="color: #333333">{</span>
+      <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">Exception</span><span style="color: #333333">();</span>
+    <span style="color: #333333">}</span>
+
+    d<span style="color: #333333">.</span><span style="color: #0000CC">enqueueBack</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;hello&quot;</span><span style="color: #333333">);</span>
+    d<span style="color: #333333">.</span><span style="color: #0000CC">dequeueBack</span><span style="color: #333333">();</span>
+    
+    System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Nice! You have a functioning deque that&#39;s been tried and slightly tested.&quot;</span><span style="color: #333333">);</span>
+    System<span style="color: #333333">.</span><span style="color: #0000CC">out</span><span style="color: #333333">.</span><span style="color: #0000CC">println</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shoot an email to morgan.howell95@gmail.com if you&#39;d like to see the array implementation.&quot;</span><span style="color: #333333">);</span>
+  <span style="color: #333333">}</span>
+<span style="color: #333333">}</span>
+</pre></div>

@@ -41,7 +41,19 @@ $(".blog.main").ready(
 		$('#qs').click(function(){
 			inverseMenuGeneral();
 			$('#queues-stacks-wrapper').removeClass('hidden');
-		})
+		});
+
+		//algo content
+		$('#sort').click(function(){
+			inverseMenuGeneral();
+			$('#csorts-wrapper').removeClass('hidden');
+		});
+
+				//algo content
+		$('#distro').click(function(){
+			inverseMenuGeneral();
+			$('#dsorts-wrapper').removeClass('hidden');
+		});
 		
 		$('.back-button').click(function(){
 			$('#workout-wrapper').addClass('hidden');
@@ -53,6 +65,8 @@ $(".blog.main").ready(
 			$('#wrapper').removeClass('hidden');
 			$('.menu-info').removeClass('hidden');
 			$('.menu').removeClass('hidden');
+			$('#csorts-wrapper').addClass('hidden');
+			$('#dsorts-wrapper').addClass('hidden');
 		});
 
 		$('#menu-info').click(function(){

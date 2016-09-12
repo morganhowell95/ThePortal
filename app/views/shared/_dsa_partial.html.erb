@@ -79,6 +79,16 @@
 
 
 <!-- partial to be loaded for queues and stacks content-->
-<div id="queues-stacks-wrapper">
+<div id="queues-stacks-wrapper" class="hidden">
 <%= render 'content/queues_stacks_partial' %>
 </div>
+
+<!-- partial to be loaded for comparison sort content-->
+<div id="csorts-wrapper" class="hidden">
+<%= render 'content/comparison_sorts_partial' %>
+</div>
+
+<!-- partial to be loaded for distribution sort content-->
+<div id="dsorts-wrapper" class="hidden">
+<%= render 'content/distro_sorts_partial' %>
+</div> 
