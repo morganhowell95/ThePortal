@@ -3,8 +3,6 @@ class LandingController < ApplicationController
   def home
   end
 
-
-
   #Download actions
   def downloadAuthFlow
     send_file 'public/assets/documents/AuthFlowAlescro.pdf', :type=>"application/pdf", :x_sendfile=>true
